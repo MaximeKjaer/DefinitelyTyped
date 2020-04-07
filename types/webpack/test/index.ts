@@ -44,8 +44,40 @@ rule = {
 };
 
 //
-// https://webpack.js.org/configuration/entry-context/#dynamic-entry
+// https://webpack.js.org/configuration/entry-context
 //
+
+configuration = {
+  entry: {
+    home: './home.js',
+    shared: ['react', 'react-dom', 'redux', 'react-redux'],
+    catalog: {
+      import: './catalog.js',
+      filename: 'pages/catalog.js',
+      dependOn: 'shared'
+    },
+    personal: {
+      import: './personal.js',
+      filename: 'pages/personal.js',
+      dependOn: 'shared'
+    }
+  }
+};
+
+configuration = {
+  entry: {
+    app: './app.js',
+    home: { import: './contact.js', filename: 'pages/[name][ext]' },
+    about: { import: './about.js', filename: 'pages/[name][ext]' }
+  }
+};
+
+configuration = {
+  entry: {
+    app: { import: './app.js', dependOn: 'react-vendors' },
+    'react-vendors': ['react', 'react-dom', 'prop-types']
+  }
+};
 
 configuration = {
     entry: () => './demo'
